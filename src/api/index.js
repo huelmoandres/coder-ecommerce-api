@@ -10,13 +10,17 @@ const path = require("path");
 const app = express();
 app.use(express.json());
 
+app.get('/', function(req, res) {
+    res.sendFile(path.join("public", 'index.html'));
+});
+
+app.use('/', express.static(path.join(__dirname, 'public')));
+app.use('/storage', express.static(path.join(__dirname, 'storage')));
+
 app.use(api.basePath + '/category', networkCategory);
 app.use(api.basePath + '/article', networkArticle);
 
 app.use(errors);
-
-app.use(express.static(path.join(__dirname, 'storage'))); //  "public" off of current is root
-app.use(express.static(path.join(__dirname, 'public'))); //  "public" off of current is root
 
 const server = http.createServer(app);
 
