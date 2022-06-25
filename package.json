@@ -1,0 +1,33 @@
+{
+  "name": "coder-ecommerce-api",
+  "version": "1.0.0",
+  "description": "coder-ecommerce api ms",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:verbose": "jest --verbose"
+  },
+  "keywords": [
+    "coder-ecommerce"
+  ],
+  "author": "Christian Huelmo & Andrés Huelmo",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "enum": "^3.0.4",
+    "express": "^4.18.1",
+    "fs": "^0.0.1-security",
+    "http": "^0.0.1-security",
+    "log4js": "^6.4.7",
+    "pg": "^8.7.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.19.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.0",
+    "@babel/preset-env": "^7.18.0",
+    "babel-jest": "^28.1.0",
+    "jest": "^28.1.0"
+  }
+}
