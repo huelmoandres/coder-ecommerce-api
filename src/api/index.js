@@ -5,21 +5,18 @@ const {api} = require('../config/app.js');
 const errors = require('../network/errors');
 const networkCategory = require('./components/category/network');
 const networkArticle = require('./components/article/network');
+const path = require("path");
 
 const app = express();
 app.use(express.json());
-
-app.use(express.static(__dirname + '/public'));
 
 app.use(api.basePath + '/category', networkCategory);
 app.use(api.basePath + '/article', networkArticle);
 
 app.use(errors);
 
-app.configure(function(){
-    app.use('/storage', express.static(__dirname + '/storage'));
-    app.use(express.static(__dirname + '/public'));
-});
+app.use(express.static(path.join(__dirname, 'storage'))); //  "public" off of current is root
+app.use(express.static(path.join(__dirname, 'public'))); //  "public" off of current is root
 
 const server = http.createServer(app);
 
