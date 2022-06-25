@@ -19,7 +19,6 @@
     "express": "^4.18.1",
     "fs": "^0.0.1-security",
     "http": "^0.0.1-security",
-    "log4js": "^6.4.7",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.19.2"

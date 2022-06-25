@@ -1,4 +1,3 @@
-const log = require('log4js').getLogger('{article/controller}');
 const coderError = require('../../../utils/coderError');
 const { HTTPCodes, ExceptionCode } = require('../../../utils/httpMessages');
 
@@ -46,10 +45,8 @@ module.exports = function () {
 			if (article) {
 				return article;
 			}
-			log.warn(`Article: article not found.`);
 			throw coderError(ExceptionCode.ARTICLE_NOT_FOUND, HTTPCodes.NOT_FOUND);
 		}
-		log.warn(`Article: id required.`);
 		throw coderError(
 			ExceptionCode.ARTICLE_ID_REQUIRED,
 			HTTPCodes.BAD_REQUEST
@@ -69,7 +66,6 @@ module.exports = function () {
 			});
 			return;
 		}
-		log.warn('Article: data required');
 		throw coderError(
 			ExceptionCode.ALL_FIELDS_ARE_REQUIRED,
 			HTTPCodes.BAD_REQUEST
@@ -80,7 +76,6 @@ module.exports = function () {
 		let article = await getArticleById(id);
 		article.deletedAt = Date.now();
 		await article.save();
-		log.info(`Article: ${id} deleted correctly.`);
 	};
 
 	return {
