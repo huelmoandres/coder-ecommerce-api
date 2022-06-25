@@ -4,9 +4,8 @@
   "description": "coder-ecommerce api ms",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "test:coverage": "jest --coverage",
-    "test:verbose": "jest --verbose"
+    "start": "node src/api/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "coder-ecommerce"
