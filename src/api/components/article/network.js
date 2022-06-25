@@ -4,9 +4,9 @@ const response = require('../../../network/response');
 const Controller = require('./controller');
 
 // Routes
-router.get('/', null, getArticles);
-router.post('/', null, create);
-router.delete('/:id', null, deleteArticle);
+router.get('/', getArticles);
+router.post('/', create);
+router.delete('/:id', deleteArticle);
 
 function getArticles(req, res, next) {
     Controller().getArticles()
