@@ -16,6 +16,11 @@ app.use(api.basePath + '/article', networkArticle);
 
 app.use(errors);
 
+app.configure(function(){
+    app.use('/storage', express.static(__dirname + '/storage'));
+    app.use(express.static(__dirname + '/public'));
+});
+
 const server = http.createServer(app);
 
 server.listen(api.port, function() {
