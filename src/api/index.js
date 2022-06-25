@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 
 app.get('/', function(req, res) {
-    res.sendFile(path.join("public", 'index.html'));
+    return res.sendFile(path.join("public", 'index.html'));
 });
 
 app.use('/', express.static(path.join(__dirname, 'public')));
