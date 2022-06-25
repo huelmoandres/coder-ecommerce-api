@@ -1,21 +1,17 @@
 const {DataTypes} = require('sequelize');
 const setupDatabase = require('../../../store/connection');
 
-const ArticleImage =  require('../image/model');
 const sequelize = setupDatabase();
 
-const Article = sequelize.define('Article', {
-    name: {
+const ArticleImage = sequelize.define('ArticleImage', {
+    url: {
         type: DataTypes.STRING,
         allowNull: false,
+        field: "url"
     },
-    description: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    categoryId: {
+    articleId: {
         type: DataTypes.INTEGER,
-        field: "category_id"
+        field: "article_id"
     },
     createdAt: {
         type: DataTypes.DATE,
@@ -36,10 +32,7 @@ const Article = sequelize.define('Article', {
         },
     },
     sequelize,
-    tableName: 'articles'
+    tableName: 'article_images'
 });
 
-Article.ArticleImages = Article.hasMany(ArticleImage, {foreignKey: 'article_id', as: 'articleImages'});
-ArticleImage.Article = ArticleImage.belongsTo(Article, {foreignKey: 'article_id', as: 'article'});
-
-module.exports = Article;
+module.exports = ArticleImage;

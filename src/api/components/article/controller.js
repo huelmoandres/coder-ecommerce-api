@@ -2,16 +2,15 @@ const coderError = require('../../../utils/coderError');
 const { HTTPCodes, ExceptionCode } = require('../../../utils/httpMessages');
 
 const {
-    CATEGORY_ATTRIBUTES, ARTICLE_ATTRIBUTES,
+    CATEGORY_ATTRIBUTES, ARTICLE_ATTRIBUTES, ARTICLE_IMAGE_ATTRIBUTES
 } = require('../../../utils/attributeConstants');
 
 const setupDatabase = require('../../../store/connection');
-const sequelize = setupDatabase();
+setupDatabase();
 
 const Article = require('./model');
 const Category = require('../category/model');
-const CategoryController = require('../category/controller');
-const { isEmpty } = require('../../../utils/utils');
+const ArticleImage = require("../image/model");
 
 module.exports = function () {
 	const getArticles = async () => {
@@ -22,6 +21,11 @@ module.exports = function () {
 					model: Category,
 					as: 'category',
 					attributes: CATEGORY_ATTRIBUTES,
+				},
+				{
+					model: ArticleImage,
+					as: 'articleImages',
+					attributes: ARTICLE_IMAGE_ATTRIBUTES,
 				}
 			]
 		});
@@ -39,8 +43,13 @@ module.exports = function () {
 						model: Category,
 						as: 'category',
 						attributes: CATEGORY_ATTRIBUTES,
+					},
+					{
+						model: ArticleImage,
+						as: 'articleImages',
+						attributes: ARTICLE_IMAGE_ATTRIBUTES,
 					}
-				],
+				]
 			});
 			if (article) {
 				return article;
@@ -53,35 +62,8 @@ module.exports = function () {
 		);
 	};
 
-	const create = async (article) => {
-		const t = await sequelize.transaction();
-		if (!isEmpty(article) && article.name && article.description) {
-			const category = await CategoryController().getCategoryById(
-				article.categoryId
-			);
-			await Article.create({
-				name: article.name,
-				description: article.description,
-				categoryId: category.id,
-			});
-			return;
-		}
-		throw coderError(
-			ExceptionCode.ALL_FIELDS_ARE_REQUIRED,
-			HTTPCodes.BAD_REQUEST
-		);
-	};
-
-	const deleteArticle = async (id) => {
-		let article = await getArticleById(id);
-		article.deletedAt = Date.now();
-		await article.save();
-	};
-
 	return {
-		create,
 		getArticles,
 		getArticleById,
-		deleteArticle
 	};
 };

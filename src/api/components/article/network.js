@@ -5,30 +5,11 @@ const Controller = require('./controller');
 
 // Routes
 router.get('/', getArticles);
-router.post('/', create);
-router.delete('/:id', deleteArticle);
 
 function getArticles(req, res, next) {
     Controller().getArticles()
         .then((contacts) => {
             response.success(req, res, contacts, 200);
-        })
-        .catch(next);
-}
-
-function create(req, res, next) {
-    Controller().create(req.body)
-        .then(() => {
-            res.setHeader("Content-Type", "application/json");
-            response.success(req, res, null, 202);
-        })
-        .catch(next);
-}
-
-function deleteArticle(req, res, next) {
-    Controller().deleteArticle(req.params.id, req.body)
-        .then((algo) => {
-            response.success(req, res, algo, 204);
         })
         .catch(next);
 }
